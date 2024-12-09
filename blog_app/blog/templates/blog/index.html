@@ -1,0 +1,50 @@
+{% extends "blog\base.html" %}
+
+{% block content %}
+    <div class="container-fluid ">
+            <div class="row my-2">
+                <div class="col">
+                    <h2 >{{blog_title}}</h2>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-light btn-primary " type="button" id="button-search">
+                        <i class="bi bi-search"></i> <!-- Bootstrap Icons -->
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                {% if posts%}
+                    {% for post in posts%}
+                        <div class="col-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img style="height:300; width:300" src="{{post.image_url}}" class="img-fluid" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">{{post.title}}</h5>
+                                            <p class="card-text">{{post.content |truncatechars:30}}</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="{% url "blog:detail" post_id=post.id %}">Read More</a>
+                                                <a class="text-decoration-none text-dark fw-bold" href="#">{{post.catagory_id}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor%}
+                {% else%}
+                        <h1>post not found</h1>
+                {% endif %}
+            </div>
+            <div class="row">
+            
+            </div>
+            
+    </div>
+{% endblock content %}
