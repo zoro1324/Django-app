@@ -5,7 +5,14 @@
        
         <div class="row">
             <div class="col-lg-8">
-              <h1 class="mb-4">{{post.title}}</h1>
+              <h1 class="mb-4">
+                {{post.title}}
+                {%for catagory in Catagories%}
+                {% if post.catagory_id == catagory.id %}
+                <small style="font-size:18px">({{catagory.catagories}})</small>
+                {%endif%}
+            {%endfor%}
+          </h1>
               <p class="text-muted">{{post.created_at |date:"F j, Y"}}</p>
               <img style="height:400; width:800" src="{{post.image_url}}" class="img-fluid mb-4" alt="Blog Image">
               <p>{{post.content}}</p>
@@ -15,9 +22,9 @@
                 <div class="card-body">
                   <h5 class="card-title">Related Posts</h5>
                   <ul class="list-unstyled">
-                    <li><a href="./detail.html">Post 1</a></li>
-                    <li><a href="./detail.html">Post 2</a></li>
-                    <li><a href="./detail.html">Post 3</a></li>
+                    {% for related_post in related_posts%}
+                        <li><a href="{% url 'blog:detail' slug=related_post.slugs %}">{{related_post.title}}</a></li>
+                    {% endfor %}
                   </ul>
                 </div>
               </div>
