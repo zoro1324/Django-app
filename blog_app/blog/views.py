@@ -4,7 +4,7 @@ from django.urls import reverse
 import logging
 from django.core.paginator import Paginator
 from .models import Post,Catagory
-
+from .forms import ContactDetail
 
 # Create your views here.
 #posts=[
@@ -29,7 +29,7 @@ def index(request):
 
 def detail(request,slug):
     #post=next((item for item in posts if item["id"] == int(post_id)),None)
-    #logger=logging.getLogger("TESTING")
+    
     try:
 
         post=Post.objects.get(slugs=slug)
@@ -38,7 +38,7 @@ def detail(request,slug):
     except Post.DoesNotExist:
         raise Http404("Post Does not found")
 
-    #logger.debug(f"The log is {post}")
+    
     return render(request,"blog/detail.html",{"post":post,"related_posts":related_posts,"Catagories":catagories})
 
 def old_url_redirect(request):
@@ -46,3 +46,13 @@ def old_url_redirect(request):
 
 def new_url_redirect(request):
     return HttpResponse("Redirected url")
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactDetail(request.POST)
+        if form.is_valid():
+            sucess_message = "Your responce has been recorded"
+            #logger=logging.getLogger("TESTING")
+            #logger.debug(f"name = {form.cleaned_data['name']} email = {form.cleaned_data['email']} message = {form.cleaned_data['message']}")
+            return render(request,"blog/contact.html",{"sucess_message" : sucess_message})
+    return render(request,"blog/contact.html")
