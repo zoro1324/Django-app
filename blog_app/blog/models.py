@@ -33,4 +33,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+class AboutUS(models.Model):
+    content = models.TextField()
+    def __str__(self):
+        return self.content
 

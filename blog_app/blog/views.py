@@ -3,7 +3,7 @@ from django.http import HttpResponse,Http404
 from django.urls import reverse
 import logging
 from django.core.paginator import Paginator
-from .models import Post,Catagory
+from .models import Post,Catagory,AboutUS
 from .forms import ContactDetail
 
 # Create your views here.
@@ -19,13 +19,13 @@ catagories = Catagory.objects.all()
 
 
 def index(request):
-    blog_title='Latest posts'
+    title='Latest posts'
 
     paginator = Paginator(all_posts,6)
     page_no = request.GET.get("page")
     page_obj = paginator.get_page(page_no)
 
-    return render(request,"blog/index.html",{"blog_title":blog_title,"page_obj":page_obj,"Catagories":catagories})
+    return render(request,"blog/index.html",{"title":title,"page_obj":page_obj,"Catagories":catagories})
 
 def detail(request,slug):
     #post=next((item for item in posts if item["id"] == int(post_id)),None)
@@ -55,4 +55,8 @@ def contact(request):
             #logger=logging.getLogger("TESTING")
             #logger.debug(f"name = {form.cleaned_data['name']} email = {form.cleaned_data['email']} message = {form.cleaned_data['message']}")
             return render(request,"blog/contact.html",{"sucess_message" : sucess_message})
-    return render(request,"blog/contact.html")
+    return render(request,"blog/contact.html",{'title':'Contact us'})
+
+def about(request):
+    about_content = AboutUS.objects.first().content
+    return render(request,"blog/about.html",{'about_content':about_content,'title':'About us'})
