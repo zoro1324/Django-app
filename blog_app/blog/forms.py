@@ -8,8 +8,8 @@ class ContactDetail(forms.Form):
 class RegisterForms(forms.ModelForm):
     username = forms.CharField(label="Username",max_length=15, required=True)
     email = forms.EmailField(label="Email",max_length=50, required=True)
-    password = forms.CharField(label="Password",max_length=20, required=True)
-    password_confirm = forms.CharField(label="Confirm password",max_length=20,required=True)
+    password = forms.CharField(label="Password",min_length=8,max_length=20, required=True)
+    password_confirm = forms.CharField(label="Confirm password",min_length=8,max_length=20,required=True)
     
 
     class Meta:
