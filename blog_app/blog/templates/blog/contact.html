@@ -5,22 +5,36 @@
     <div class="d-flex justify-content-center mt-5">
         <div class="d-flex gap-3 flex-column">
             <h3>Contact Form</h3>
-            {% if sucess_message %}
-            <div class="alert alert-success" role="alert">{{sucess_message}}</div>
-            {% endif %}
             <form method="post" class="row g-3">
                 {% csrf_token %}
                 <div class="col-md-6">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{form.name.value |default:''}}">
+                    {% if form.name.errors %}
+                        <div class="col-12">
+                            <span class="text-danger">{{form.name.errors}}</span>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" value="{{form.email.value |default:''}}">
+                    {% if form.email.errors %}
+                        <div class="col-12">
+                            <span class="text-danger">{{form.email.errors}}</span>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <div class="col-12">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    <textarea class="form-control" id="message" name="message" rows="4" ></textarea>
+                    {% if form.message.errors %}
+                        <div class="col-12">
+                            <span class="text-danger">{{form.message.errors}}</span>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -28,5 +42,10 @@
             </form>
         </div>
     </div> 
+</div>
+<div class="text-center">
+    {% if sucess_message %}
+        <div class="alert alert-success" role="alert">{{sucess_message}}</div>
+    {% endif %}
 </div>
 {% endblock content %}
