@@ -58,5 +58,9 @@ def contact(request):
     return render(request,"blog/contact.html",{'title':'Contact us'})
 
 def about(request):
-    about_content = AboutUS.objects.first().content
+    about_content = AboutUS.objects.first()
+    if about_content is None or not about_content.content:
+        about_content = "This content is currently unavailable"
+    else:
+        about_content = about_content.content
     return render(request,"blog/about.html",{'about_content':about_content,'title':'About us'})
