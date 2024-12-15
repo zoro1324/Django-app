@@ -75,7 +75,8 @@ def register(request):
             user_data=form.save(commit=False)
             user_data.set_password(form.cleaned_data['password'])
             user_data.save()
-            messages.success(request,"You have successfully registered!")
+            messages.success(request,"You have successfully registered! Now you can Log in")
+            return redirect(reverse('blog:login'))
     return render(request,"blog/register.html",{'form':form,'title':'Register'})
 
 def login(request):
@@ -88,8 +89,8 @@ def login(request):
             user = authenticate(username=username,password=password)
             if user is not None:
                 auth_login(request,user)
-                return redirect("/dashboard/")
+                return redirect(reverse("blog:dashboard"))
     return render(request,'blog/login.html',{'title':'Log in','form':form})
 
 def dashboard(request):
-    return render(request,"blog/dashboard.html")
+    return render(request,"blog/dashboard.html",{'title':'dashboard'})

@@ -4,6 +4,15 @@
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-4">
                 <h3>Login</h3>
+                {% if messages %}
+                            {% for message in messages %}
+                                <div class= "col-12" >
+                                    <div class = "alert alert-success">
+                                        <span>{{message}}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                {% endif %}
                 <div class="">
                     <div class="col-12">
                         <span class="fw-bold"></span>
