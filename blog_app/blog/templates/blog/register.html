@@ -15,7 +15,9 @@
                             <input type="text" class="form-control" id="username" name="username" value="{{form.username.value |default:""}}">
                             {% if form.username.errors %}
                                 <div class="col-12">
+                                    <div class = "alert alert-danger">
                                         <span class="text-danger">{{form.username.errors}}</span>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -24,7 +26,9 @@
                             <input type="email" class="form-control" id="email" name="email" value="{{form.email.value |default:""}}">
                             {% if form.email.errors %}
                                 <div class="col-12">
+                                    <div class = "alert alert-danger">
                                         <span class="text-danger">{{form.email.errors}}</span>
+                                    </div>
                                 </div>
                             {% endif %}
 
@@ -34,7 +38,9 @@
                             <input type="password" class="form-control" id="password" name="password">
                             {% if form.password.errors %}
                                 <div class="col-12">
+                                    <div class = "alert alert-danger">
                                         <span class="text-danger">{{form.password.errors}}</span>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -43,15 +49,28 @@
                             <input type="password" class="form-control" id="confirm_password" name="password_confirm">
                             {% if form.password_confirm.errors %}
                                 <div class="col-12">
+                                    <div class = "alert alert-danger">
                                         <span class="text-danger">{{form.password_confirm.errors}}</span>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
                         {% for error in form.non_field_errors %}
                             <div class="col-12">
-                                <span class="text-danger">{{error}}</span>
+                                <div class = "alert alert-danger">
+                                    <span class="text-danger">{{error}}</span>
+                                </div>
                             </div>
                         {% endfor %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class= "col-12" >
+                                    <div class = "alert alert-success">
+                                        <span>{{message}}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="my-3 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>

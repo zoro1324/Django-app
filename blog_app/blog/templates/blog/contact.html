@@ -44,8 +44,10 @@
     </div> 
 </div>
 <div class="text-center">
-    {% if sucess_message %}
-        <div class="alert alert-success" role="alert">{{sucess_message}}</div>
+    {% if messages %}
+        {% for sucess_message in messages %}
+            <div class="alert alert-success" role="alert">{{sucess_message}}</div>
+        {% endfor %}
     {% endif %}
 </div>
 {% endblock content %}

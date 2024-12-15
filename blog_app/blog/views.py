@@ -5,6 +5,7 @@ import logging
 from django.core.paginator import Paginator
 from .models import Post,Catagory,AboutUS
 from .forms import ContactDetail,RegisterForms
+from django.contrib import messages
 
 # Create your views here.
 #posts=[
@@ -49,14 +50,13 @@ def new_url_redirect(request):
 
 def contact(request):
     form = ContactDetail()
-    sucess_message= None
     if request.method == 'POST':
         form = ContactDetail(request.POST)
         if form.is_valid():
-            sucess_message = "Your responce has been recorded"
+            messages.success(request,"Your responce has been recorded")
             #logger=logging.getLogger("TESTING")
             #logger.debug(f"name = {form.cleaned_data['name']} email = {form.cleaned_data['email']} message = {form.cleaned_data['message']}")
-    return render(request,"blog/contact.html",{'title':'Contact us','form':form,"sucess_message" : sucess_message,})
+    return render(request,"blog/contact.html",{'title':'Contact us','form':form})
 
 def about(request):
     about_content = AboutUS.objects.first()
@@ -74,5 +74,6 @@ def register(request):
             user_data=form.save(commit=False)
             user_data.set_password(form.cleaned_data['password'])
             user_data.save()
-            print("Registered")
+            success_message = "You have sucessfully registered!"
+            messages.success(request,"You have successfully registered!")
     return render(request,"blog/register.html",{'form':form,'title':'Register'})
