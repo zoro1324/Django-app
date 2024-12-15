@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from .models import Post,Catagory,AboutUS
 from .forms import ContactDetail,RegisterForms,LoginForm
 from django.contrib import messages
-from django.contrib.auth import authenticate,login as auth_login
+from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 
 # Create your views here.
 #posts=[
@@ -94,3 +94,7 @@ def login(request):
 
 def dashboard(request):
     return render(request,"blog/dashboard.html",{'title':'dashboard'})
+
+def logout(request):
+    auth_logout(request)
+    return redirect(reverse("blog:index"))
