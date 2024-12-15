@@ -47,6 +47,11 @@
                                 </div>
                             {% endif %}
                         </div>
+                        {% for error in form.non_field_errors %}
+                            <div class="col-12">
+                                <span class="text-danger">{{error}}</span>
+                            </div>
+                        {% endfor %}
                         <div class="my-3 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>

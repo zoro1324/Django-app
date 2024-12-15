@@ -75,4 +75,4 @@ def register(request):
             user_data.set_password(form.cleaned_data['password'])
             user_data.save()
             print("Registered")
-    return render(request,"blog/register.html",{'form':form})
+    return render(request,"blog/register.html",{'form':form,'title':'Register'})
