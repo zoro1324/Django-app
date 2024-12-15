@@ -15,9 +15,7 @@
                             <input type="text" class="form-control" id="username" name="username" value="{{form.username.value |default:""}}">
                             {% if form.username.errors %}
                                 <div class="col-12">
-                                    <div class = "alert alert-danger">
-                                        <span class="text-danger">{{form.username.errors}}</span>
-                                    </div>
+                                    <span class="text-danger">{{form.username.errors}}</span>
                                 </div>
                             {% endif %}
                         </div>
@@ -26,9 +24,7 @@
                             <input type="email" class="form-control" id="email" name="email" value="{{form.email.value |default:""}}">
                             {% if form.email.errors %}
                                 <div class="col-12">
-                                    <div class = "alert alert-danger">
-                                        <span class="text-danger">{{form.email.errors}}</span>
-                                    </div>
+                                    <span class="text-danger">{{form.email.errors}}</span>
                                 </div>
                             {% endif %}
 
@@ -38,9 +34,7 @@
                             <input type="password" class="form-control" id="password" name="password">
                             {% if form.password.errors %}
                                 <div class="col-12">
-                                    <div class = "alert alert-danger">
                                         <span class="text-danger">{{form.password.errors}}</span>
-                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -49,9 +43,7 @@
                             <input type="password" class="form-control" id="confirm_password" name="password_confirm">
                             {% if form.password_confirm.errors %}
                                 <div class="col-12">
-                                    <div class = "alert alert-danger">
-                                        <span class="text-danger">{{form.password_confirm.errors}}</span>
-                                    </div>
+                                    <span class="text-danger">{{form.password_confirm.errors}}</span>
                                 </div>
                             {% endif %}
                         </div>

@@ -4,8 +4,9 @@ from django.urls import reverse
 import logging
 from django.core.paginator import Paginator
 from .models import Post,Catagory,AboutUS
-from .forms import ContactDetail,RegisterForms
+from .forms import ContactDetail,RegisterForms,LoginForm
 from django.contrib import messages
+from django.contrib.auth import authenticate,login as auth_login
 
 # Create your views here.
 #posts=[
@@ -74,6 +75,21 @@ def register(request):
             user_data=form.save(commit=False)
             user_data.set_password(form.cleaned_data['password'])
             user_data.save()
-            success_message = "You have sucessfully registered!"
             messages.success(request,"You have successfully registered!")
     return render(request,"blog/register.html",{'form':form,'title':'Register'})
+
+def login(request):
+    form = LoginForm()
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username,password=password)
+            if user is not None:
+                auth_login(request,user)
+                return redirect("/dashboard/")
+    return render(request,'blog/login.html',{'title':'Log in','form':form})
+
+def dashboard(request):
+    return render(request,"blog/dashboard.html")

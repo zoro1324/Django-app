@@ -22,5 +22,5 @@ handler404= "blog_app.views.coustom_errorpage"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/',include('blog.urls'),name="blog")
+    path('',include('blog.urls'),name="blog")
 ]
