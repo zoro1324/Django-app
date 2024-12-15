@@ -98,3 +98,6 @@ def dashboard(request):
 def logout(request):
     auth_logout(request)
     return redirect(reverse("blog:index"))
+
+def forget_password(request):
+    return render(request,"blog/forget_password.html",{'title':'Forget Password'})

@@ -57,7 +57,7 @@
                             {% endfor %}
                         {% endif %}
                         <div class="my-3 d-flex justify-content-between">
-                            <a href="/password_reset">Forgot Password</a>
+                            <a href="{% url "blog:forget_password" %}">Forgot Password</a>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
